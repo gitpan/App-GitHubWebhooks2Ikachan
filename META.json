@@ -4,7 +4,7 @@
       "moznion <moznion@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v0.11.0",
+   "generated_by" : "Minilla/v0.11.1",
    "license" : [
       "perl_5"
    ],
@@ -67,7 +67,7 @@
    "provides" : {
       "App::GitHubWebhooks2Ikachan" : {
          "file" : "lib/App/GitHubWebhooks2Ikachan.pm",
-         "version" : "0.01"
+         "version" : "0.02"
       },
       "App::GitHubWebhooks2Ikachan::Events" : {
          "file" : "lib/App/GitHubWebhooks2Ikachan/Events.pm"
@@ -96,5 +96,5 @@
          "web" : "https://github.com/moznion/App-GitHubWebhooks2Ikachan"
       }
    },
-   "version" : "0.01"
+   "version" : "0.02"
 }

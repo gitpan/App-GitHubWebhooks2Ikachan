@@ -11,7 +11,7 @@ configure_requires:
   CPAN::Meta::Prereqs: 0
   Module::Build: 0.38
 dynamic_config: 0
-generated_by: 'Minilla/v0.11.0, CPAN::Meta::Converter version 2.133380'
+generated_by: 'Minilla/v0.11.1, CPAN::Meta::Converter version 2.133380'
 license: perl
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -30,7 +30,7 @@ no_index:
 provides:
   App::GitHubWebhooks2Ikachan:
     file: lib/App/GitHubWebhooks2Ikachan.pm
-    version: 0.01
+    version: 0.02
   App::GitHubWebhooks2Ikachan::Events:
     file: lib/App/GitHubWebhooks2Ikachan/Events.pm
   App::GitHubWebhooks2Ikachan::Events::IssueComment:
@@ -56,4 +56,4 @@ resources:
   bugtracker: https://github.com/moznion/App-GitHubWebhooks2Ikachan/issues
   homepage: https://github.com/moznion/App-GitHubWebhooks2Ikachan
   repository: git://github.com/moznion/App-GitHubWebhooks2Ikachan.git
-version: 0.01
+version: 0.02

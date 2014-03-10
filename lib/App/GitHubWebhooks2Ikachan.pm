@@ -17,7 +17,7 @@ use Class::Accessor::Lite(
     rw  => [qw/ua ikachan_url/],
 );
 
-our $VERSION = "0.01";
+our $VERSION = "0.02";
 
 sub new {
     my ($class, $args) = @_;
@@ -55,9 +55,14 @@ sub respond_to_ikachan {
     my ($self, $req) = @_;
 
     my $channel = $req->path_info;
-    $channel =~ s!\A/+!!;
     unless ($channel) {
         die "Missing channel name";
+    }
+    $channel =~ s!\A/+!!;
+
+    # complement leading sharp for channel name
+    if ($channel !~ /\A\%23/) {
+        $channel = '%23' . $channel;
     }
 
     my $payload = $req->param('payload');
@@ -94,6 +99,8 @@ sub send_to_ikachan {
     ]);
 
     $text = encode_utf8($text);
+
+    $channel =~ s/\A\%23/#/;
     infof("POST %s, %s", $channel, $text);
 }
 
