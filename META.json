@@ -67,7 +67,7 @@
    "provides" : {
       "App::GitHubWebhooks2Ikachan" : {
          "file" : "lib/App/GitHubWebhooks2Ikachan.pm",
-         "version" : "0.04"
+         "version" : "0.05"
       },
       "App::GitHubWebhooks2Ikachan::Events" : {
          "file" : "lib/App/GitHubWebhooks2Ikachan/Events.pm"
@@ -96,5 +96,5 @@
          "web" : "https://github.com/moznion/App-GitHubWebhooks2Ikachan"
       }
    },
-   "version" : "0.04"
+   "version" : "0.05"
 }

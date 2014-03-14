@@ -17,7 +17,7 @@ use Class::Accessor::Lite(
     rw  => [qw/ua ikachan_url/],
 );
 
-our $VERSION = "0.04";
+our $VERSION = "0.05";
 
 sub new {
     my ($class, $args) = @_;
@@ -29,12 +29,18 @@ sub new {
     bless {
         ua          => $ua,
         ikachan_url => $args->{ikachan_url},
+        debug       => $args->{debug},
     }, $class;
 }
 
 sub to_app {
     my ($self) = @_;
 
+    if ($self->{debug}) {
+        infof("*** RUNNING IN DEBUG MODE ***");
+    }
+
+    infof("App::GitHubWebhooks2Ikachan Version: %.2f", $VERSION);
     infof("ikachan url: %s", $self->ikachan_url);
 
     builder {
@@ -44,9 +50,7 @@ sub to_app {
             my $env = shift;
             my $req = Plack::Request->new($env);
 
-            $self->respond_to_ikachan($req);
-
-            return [200, ['Content-Type' => 'text/plain', 'Content-Length' => 2], ['OK']];
+            return $self->respond_to_ikachan($req);
         };
     };
 }
@@ -54,18 +58,20 @@ sub to_app {
 sub respond_to_ikachan {
     my ($self, $req) = @_;
 
-    my $channel = $req->path_info;
-    unless ($channel) {
-        die "Missing channel name";
+    (my $channel = $req->path_info) =~ s!\A/+!!;
+    if (!$channel) {
+        return [400, ['Content-Type' => 'text/plain', 'Content-Length' => 20], ['Missing channel name']];
     }
-    $channel =~ s!\A/+!!;
 
     my $payload = $req->param('payload');
     unless ($payload) {
-        die "Payload is nothing";
+        return [400, ['Content-Type' => 'text/plain', 'Content-Length' => 18], ['Payload is nothing']];
     }
     my $dat = decode_json($payload);
-    # infof("Payload: %s", $payload);
+
+    if ($self->{debug}) {
+        infof("Payload: %s", $payload);
+    }
 
     my $event_name = $req->header('X-GitHub-Event');
 
@@ -83,6 +89,8 @@ sub respond_to_ikachan {
             $self->send_to_ikachan($channel, $send_text);
         }
     }
+
+    return [200, ['Content-Type' => 'text/plain', 'Content-Length' => 2], ['OK']];
 }
 
 sub send_to_ikachan {
@@ -108,6 +116,7 @@ sub parse_options {
 
     $p->getoptionsfromarray(\@argv, \my %opt, qw/
         ikachan_url=s
+        debug
     /) or pod2usage();
     $opt{ikachan_url} || pod2usage();
 
@@ -142,6 +151,10 @@ App::GitHubWebhooks2Ikachan - Web server to notify GitHub Webhooks to L<App::Ika
 App::GitHubWebhooks2Ikachan is the server to notify GitHub Webhooks to L<App::Ikachan>.
 
 Now, this application supports C<issues>, C<pull_request>, C<issue_comment>, and C<push> webhooks of GitHub.
+
+=head1 PARAMETERS
+
+Please refer to the L<githubwebhooks2ikachan>.
 
 =head1 USAGE
 
@@ -196,6 +209,8 @@ If you omit this parameter, it will subscribe the all of supported actions of C<
 =back
 
 =head1 SEE ALSO
+
+L<githubwebhooks2ikachan>
 
 L<http://developer.github.com/v3/activity/events/types/>.
 

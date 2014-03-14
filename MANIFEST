@@ -18,6 +18,7 @@ t/02_issue_comment.t
 t/03_pull_request.t
 t/04_push.t
 t/10_subscribe.t
+t/20_error_handling.t
 t/resources/issue_comment/created.json
 t/resources/issues/closed.json
 t/resources/issues/opened.json

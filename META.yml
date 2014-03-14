@@ -30,7 +30,7 @@ no_index:
 provides:
   App::GitHubWebhooks2Ikachan:
     file: lib/App/GitHubWebhooks2Ikachan.pm
-    version: 0.04
+    version: 0.05
   App::GitHubWebhooks2Ikachan::Events:
     file: lib/App/GitHubWebhooks2Ikachan/Events.pm
   App::GitHubWebhooks2Ikachan::Events::IssueComment:
@@ -56,4 +56,4 @@ resources:
   bugtracker: https://github.com/moznion/App-GitHubWebhooks2Ikachan/issues
   homepage: https://github.com/moznion/App-GitHubWebhooks2Ikachan
   repository: git://github.com/moznion/App-GitHubWebhooks2Ikachan.git
-version: 0.04
+version: 0.05
