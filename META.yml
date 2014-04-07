@@ -30,15 +30,19 @@ no_index:
 provides:
   App::GitHubWebhooks2Ikachan:
     file: lib/App/GitHubWebhooks2Ikachan.pm
-    version: '0.06'
+    version: '0.10'
   App::GitHubWebhooks2Ikachan::Events:
     file: lib/App/GitHubWebhooks2Ikachan/Events.pm
+  App::GitHubWebhooks2Ikachan::Events::CommitComment:
+    file: lib/App/GitHubWebhooks2Ikachan/Events/CommitComment.pm
   App::GitHubWebhooks2Ikachan::Events::IssueComment:
     file: lib/App/GitHubWebhooks2Ikachan/Events/IssueComment.pm
   App::GitHubWebhooks2Ikachan::Events::Issues:
     file: lib/App/GitHubWebhooks2Ikachan/Events/Issues.pm
   App::GitHubWebhooks2Ikachan::Events::PullRequest:
     file: lib/App/GitHubWebhooks2Ikachan/Events/PullRequest.pm
+  App::GitHubWebhooks2Ikachan::Events::PullRequestReviewComment:
+    file: lib/App/GitHubWebhooks2Ikachan/Events/PullRequestReviewComment.pm
   App::GitHubWebhooks2Ikachan::Events::Push:
     file: lib/App/GitHubWebhooks2Ikachan/Events/Push.pm
 requires:
@@ -56,4 +60,4 @@ resources:
   bugtracker: https://github.com/moznion/App-GitHubWebhooks2Ikachan/issues
   homepage: https://github.com/moznion/App-GitHubWebhooks2Ikachan
   repository: git://github.com/moznion/App-GitHubWebhooks2Ikachan.git
-version: '0.06'
+version: '0.10'

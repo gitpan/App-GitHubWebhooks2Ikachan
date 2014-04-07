@@ -1,4 +1,4 @@
-package App::GitHubWebhooks2Ikachan::Events::IssueComment;
+package App::GitHubWebhooks2Ikachan::Events::PullRequestReviewComment;
 use strict;
 use warnings;
 use utf8;
@@ -10,13 +10,12 @@ sub call {
     my $comment = $context->dat->{comment};
 
     (my $comment_body = $comment->{body}) =~ s/\r?\n.*//g;
-    my $user_name    = $comment->{user}->{login};
+    my $user_name = $comment->{user}->{login};
     my $url = $comment->{html_url};
 
-    my $issue = $context->dat->{issue};
-    my $issue_number = $issue->{number};
+    my ($pull_request_number) = $comment->{pull_request_url} =~ m!/(\d+)\Z!;
 
-    my $main_text = "[comment (#$issue_number)] $comment_body (\@$user_name)";
+    my $main_text = "[review comment (#$pull_request_number)] $comment_body (\@$user_name)";
     return String::IRC->new($main_text)->green . " $url";
 }
 
